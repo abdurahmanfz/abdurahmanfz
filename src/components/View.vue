@@ -130,7 +130,71 @@
               </v-list-item-action>
             </v-list-item>
           </v-card-text>
-        </v-card>      
+        </v-card>
+        
+        <v-card width="800px" class="my-4 elevation-0">
+          <v-card-title class="title">
+            Language Skills
+          </v-card-title>
+          <v-card-text>
+            <v-card v-for="item in languages" :key="item.id" flat>
+              <v-card-text class="pb-0 subtitle-1">
+                <span style="color: black;">{{item.title}}</span>
+              </v-card-text>
+              <v-card-text class="pt-0">
+                <v-layout wrap>
+                  <v-flex xs4>
+                    <span class="subtitle-4">Writing</span> <br>
+                    <v-progress-circular
+                      :value="item.score.writing"
+                      color="error"
+                      size="100"
+                      width="15"
+                    >{{item.score.writing}}</v-progress-circular>
+                  </v-flex>
+                  <v-flex xs4>
+                    <span class="subtitle-4">Speaking</span> <br>
+                    <v-progress-circular
+                      :value="item.score.speaking"
+                      color="blue"
+                      size="100"
+                      width="15"
+                    >{{item.score.speaking}}</v-progress-circular>
+                  </v-flex>
+                  <v-flex xs4>
+                    <span class="subtitle-4">Reading</span> <br>
+                    <v-progress-circular
+                      :value="item.score.reading"
+                      color="orange"
+                      size="100"
+                      width="15"
+                    >{{item.score.reading}}</v-progress-circular>
+                  </v-flex>
+                </v-layout>
+              </v-card-text>
+              <v-divider></v-divider>
+            </v-card>
+            <!-- <v-list-item dense>
+              <v-list-item-content>
+                <v-list-item-title>
+                </v-list-item-title>
+
+                <v-list-item-subtitle>
+                  <v-progress-linear
+                    :color="item.color"
+                    :background-color="item.bgColor"
+                    :length="item.count"
+                    v-model="item.score.writing"
+                  ></v-progress-linear>
+                </v-list-item-subtitle>
+
+              </v-list-item-content>
+              <v-list-item-action>
+                {{ item.rate }} / 100
+              </v-list-item-action>
+            </v-list-item> -->
+          </v-card-text>
+        </v-card>
       </v-flex>
     </v-layout>
   </v-container>
@@ -221,6 +285,37 @@ export default {
         id: 4, title: 'Blender', count: 10, rate: 40,
         color: 'orange lighten-1', bgColor: 'orange lighten-3',
       },
+    ],
+
+    languages: [
+      { 
+        id: 1, 
+        title: 'Bahasa', 
+        score: {
+          writing: 90, speaking: 95, reading: 100
+        }
+      },
+      { 
+        id: 2, 
+        title: 'Sundanesse', 
+        score: {
+          writing: 90, speaking: 95, reading: 100
+        }
+      },
+      { 
+        id: 3, 
+        title: 'English', 
+        score: {
+          writing: 80, speaking: 75, reading: 90
+        }
+      },
+      { 
+        id: 4, 
+        title: 'Arabic', 
+        score: {
+          writing: 70, speaking: 40, reading: 60
+        }
+      }
     ],
 
     emptyIcon: 'mdi-heart-outline',
