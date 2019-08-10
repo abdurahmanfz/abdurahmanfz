@@ -2,12 +2,12 @@
   <v-app style="background: #ECEFF1">
     <v-app-bar app dark>
       <v-toolbar-title class="Title text-sentencecase">
-        <span class="font-weight-bold">Curriculum</span>
-        <span class="font-weight-light">Vitae</span>
+        <span class="font-weight-bold" style="color: #FDD835">Curriculum</span>
+        <span class="font-weight-light" style="color: #FDD835">Vitae</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn dark icon @click="drawer = !drawer">
-        <v-icon color="white">mdi-account-tie</v-icon>
+        <v-icon color="yellow darken-1">mdi-contacts</v-icon>
       </v-btn>
     </v-app-bar>
 
@@ -78,7 +78,7 @@
       </v-container>
     </v-content>
 
-    <v-footer style="height: 40px;" dark inset fixed>
+    <v-footer style="height: 40px; color: #FDD835" dark inset fixed>
       Made with &nbsp;<v-icon small color="green">mdi-vuejs</v-icon>&nbsp; + &nbsp;<v-icon small color="blue">mdi-vuetify</v-icon>&nbsp; = &nbsp;<v-icon small color="red">mdi-heart</v-icon>&nbsp;
     </v-footer>
   </v-app>
@@ -93,11 +93,14 @@ export default {
     // HelloWorld,
     CoreView: () => import('@/components/View')  
   },
+  
   data: () => ({
     drawer: false,
     items: [
       { icon: 'mdi-instagram', text: 'Instagram', to: 'https://www.instagram.com/abdurahmanfz/'},
       { icon: 'mdi-github-box', text: 'Github', to: 'https://github.com/abdurahmanfz'},
+      { icon: 'mdi-medium', text: 'Medium', to: 'https://medium.com/@abdurahmanfz'},
+      { icon: 'mdi-linkedin', text: 'Linkedin', to: 'https://www.linkedin.com/in/fauzan-abdurrahman-b0224a136/'},
       { icon: 'mdi-account', text: 'About', to: '/about'},
       // { icon: 'mdi-github-box', text: 'About', to: 'https://github.com/abdurahmanfz'},
     ]

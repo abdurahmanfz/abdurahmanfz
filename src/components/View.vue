@@ -27,6 +27,7 @@
           </v-card-text>
         </v-card>
 
+        <v-scroll-y-transition>
         <v-card width="800px" class="my-4 elevation-0">
           <v-card-title class="title">
             Hobbies
@@ -64,7 +65,8 @@
               </template>
             </v-layout>
           </v-card-text>
-        </v-card>      
+        </v-card>  
+        </v-scroll-y-transition>    
 
         <v-card width="800px" class="my-4 elevation-0">
           <v-card-title class="title">
@@ -72,7 +74,7 @@
           </v-card-title>
           <v-card-text>
             <v-layout wrap>
-              <template v-for="item in education">
+              <template v-for="item in educations">
                 <v-flex xs12 sm4 :key="item.id" style="padding: 8px 4px">
                   <v-icon>{{item.icon}}</v-icon> &nbsp;
                   <span class="subtitle-2">{{item.title}}</span>
@@ -174,28 +176,24 @@
               </v-card-text>
               <v-divider></v-divider>
             </v-card>
-            <!-- <v-list-item dense>
-              <v-list-item-content>
-                <v-list-item-title>
-                </v-list-item-title>
-
-                <v-list-item-subtitle>
-                  <v-progress-linear
-                    :color="item.color"
-                    :background-color="item.bgColor"
-                    :length="item.count"
-                    v-model="item.score.writing"
-                  ></v-progress-linear>
-                </v-list-item-subtitle>
-
-              </v-list-item-content>
-              <v-list-item-action>
-                {{ item.rate }} / 100
-              </v-list-item-action>
-            </v-list-item> -->
           </v-card-text>
         </v-card>
       </v-flex>
+
+      <v-scroll-y-transition>
+        <v-btn
+          v-if="goUpButton"
+          color="yellow darken-1"
+          small
+          fixed
+          bottom
+          right
+          fab
+          @click="$vuetify.goTo(target, options)"
+        >
+          <v-icon color="grey darken-4">mdi-gesture-swipe-up</v-icon>
+        </v-btn>
+      </v-scroll-y-transition>
     </v-layout>
   </v-container>
 </template>
@@ -220,6 +218,11 @@
 <script>
 export default {
   data: () => ({
+    goUpButton: false,
+    hobby: '',
+    education: '',
+    skill: '',
+    language: '',
     
     hobbies: [
       { id: 1, icon: 'mdi-wallet-travel', title:'Traveling', count: 5, rate: 4, description: '4/5' },
@@ -227,7 +230,7 @@ export default {
       { id: 3, icon: 'mdi-code-not-equal-variant', title:'Coding', count: 10, rate: 8.5, description: 'Nope, just kidding. its 4.5/5 !' },
     ],
 
-    education: [
+    educations: [
       { 
         id: 1, icon: 'mdi-face', title:'Elementary', 
         name: "Madrasah Ibtidaiyah Zakaria",
@@ -278,11 +281,11 @@ export default {
         color: 'green darken-1', bgColor: 'green lighten-3',
       },
       { 
-        id: 4, title: 'Sketch Up', count: 10, rate: 70,
+        id: 5, title: 'Sketch Up', count: 10, rate: 70,
         color: 'red lighten-1', bgColor: 'red lighten-3',
       },
       { 
-        id: 4, title: 'Blender', count: 10, rate: 40,
+        id: 6, title: 'Blender', count: 10, rate: 40,
         color: 'orange lighten-1', bgColor: 'orange lighten-3',
       },
     ],
@@ -321,6 +324,44 @@ export default {
     emptyIcon: 'mdi-heart-outline',
     fullIcon: 'mdi-heart',
     halfIcon: 'mdi-heart-half-full',
+
+    scrollPosition: 0,
   }),
+
+  mounted() {
+    window.onscroll = () => {
+      this.scrollPosition = document.documentElement.scrollTop
+      if (document.documentElement.scrollTop > 300) {
+        this.goUpButton = true  
+        // console.log(this.scrollPosition);
+        
+        
+        // document.getElementById("goUp").style.display = 'block'   
+      } else {
+        this.goUpButton = false
+        // document.getElementById("goUp").style.display = 'none'
+      }
+    }
+  },
+
+  computed: {
+    target () {
+      const value = 0
+      return value
+    },
+    options () {
+      return {
+        duration: 1000,
+        offset: 0,
+        easing: 'easeInOutCubic'
+      }
+    },
+  },
+
+  methods: {
+    goUp() {
+      document.documentElement.scrollTop = 0;
+    },
+  },
 };
 </script>
